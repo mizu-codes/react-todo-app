@@ -30,9 +30,9 @@ function App() {
         <header className="app__header">
           <div className="app__heading-row">
             <div>
-              <h1 className="app__title">Tasks</h1>
+              <h1 className="app__title">TaskHub</h1>
               <p className="app__subtitle">
-                Stay on top of your coursework, one task at a time.
+                Stay organized. Stay productive.
               </p>
             </div>
             <div className="app__stat" aria-label="Active tasks remaining">
