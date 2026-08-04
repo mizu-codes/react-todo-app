@@ -15,31 +15,31 @@ function useTodos() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-function handleAddTodo() {
-  const trimmed = input.trim();
+  function handleAddTodo() {
+    const trimmed = input.trim();
 
-  if (!trimmed) return;
+    if (!trimmed) return;
 
-  setTodos((prevTodos) => {
-    const duplicate = prevTodos.some(
-      (todo) => todo.title.toLowerCase() === trimmed.toLowerCase()
-    );
+    setTodos((prevTodos) => {
+      const duplicate = prevTodos.some(
+        (todo) => todo.title.toLowerCase() === trimmed.toLowerCase(),
+      );
 
-    if (duplicate) return prevTodos;
+      if (duplicate) return prevTodos;
 
-    return [
-      ...prevTodos,
-      {
-        id: crypto.randomUUID(),
-        title: trimmed,
-        completed: false,
-        createdAt: new Date().toLocaleString(),
-      },
-    ];
-  });
+      return [
+        ...prevTodos,
+        {
+          id: crypto.randomUUID(),
+          title: trimmed,
+          completed: false,
+          createdAt: new Date().toLocaleString(),
+        },
+      ];
+    });
 
-  setInput("");
-}
+    setInput("");
+  }
 
   function handleToggleComplete(id: string) {
     setTodos(
