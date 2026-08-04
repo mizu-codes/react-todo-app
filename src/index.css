@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Background gradient — deep sea navy into teal                  */
+  --gradient-start: #0b1a1f;
+  --gradient-mid: #15303a;
+  --gradient-end: #26505e;
+
+  /* Accent — warm coral, used sparingly for actions & focus states */
+  --color-accent: #ff7a59;
+  --color-accent-dark: #e0603f;
+  --color-accent-soft: #ffe4da;
+  --color-accent-rgb: 255, 122, 89;
+
+  /* Secondary accent — used for "completed" state                 */
+  --color-success: #2fbf87;
+  --color-success-soft: #dcf7ec;
+  --color-success-rgb: 47, 191, 135;
+
+  /* Neutrals */
+  --color-surface: #ffffff;
+  --color-surface-glass: rgba(255, 255, 255, 0.92);
+  --color-surface-muted: #f6f7fb;
+  --color-surface-muted-hover: #eef0f8;
+  --color-border: #eae9f3;
+  --color-border-strong: #dcdaea;
+  --color-ink: #1c212c;
+  --color-ink-muted: #666c7d;
+  --color-ink-faint: #9ba0b0;
+
+  /* Danger */
+  --color-danger: #e5484d;
+  --color-danger-soft: #fde6e6;
+
+  /* Typography */
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Elevation — softer, more diffuse than a single hard shadow */
+  --shadow-card:
+    0 1px 1px rgba(15, 32, 39, 0.04), 0 8px 24px -8px rgba(15, 32, 39, 0.28),
+    0 30px 60px -24px rgba(15, 32, 39, 0.45);
+  --shadow-soft: 0 6px 16px -8px rgba(28, 33, 44, 0.16);
+  --shadow-pop: 0 10px 22px -10px rgba(224, 96, 63, 0.45);
+
+  /* Radii */
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------------------------------------------------------- */
+/* Reset                                                              */
+/* ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.3);
+}
+
+input {
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

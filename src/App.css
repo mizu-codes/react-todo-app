@@ -1,0 +1,608 @@
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 4vw, 32px);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start) 0%,
+    var(--gradient-mid) 55%,
+    var(--gradient-end) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+/* Signature ambient glow drifting behind the card */
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.app::before {
+  background: var(--color-accent);
+  top: -120px;
+  left: -100px;
+  animation: drift-a 14s ease-in-out infinite;
+}
+
+.app::after {
+  background: var(--color-success);
+  bottom: -140px;
+  right: -100px;
+  animation: drift-b 16s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.12);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -20px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app::before,
+  .app::after {
+    animation: none;
+  }
+}
+
+/* ================================================================ */
+/* Card — the only element that scrolls is the list inside it        */
+/* ================================================================ */
+.app__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  height: min(680px, 100%);
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__header {
+  flex-shrink: 0;
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app__heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.app__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.app__subtitle {
+  margin-top: 4px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: var(--color-ink-muted);
+  max-width: 32ch;
+}
+
+.app__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  padding: 9px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 228, 218, 0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 122, 89, 0.18);
+}
+
+.app__stat-count {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  line-height: 1;
+}
+
+.app__stat-label {
+  margin-top: 2px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  opacity: 0.82;
+}
+
+.app__main {
+  flex: 1;
+  min-height: 0;
+  padding: 18px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.app__footer {
+  flex-shrink: 0;
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.app__footer p {
+  font-size: 0.78rem;
+  color: var(--color-ink-faint);
+  text-align: center;
+}
+
+/* ================================================================ */
+/* TodoInput                                                         */
+/* ================================================================ */
+.todo-input {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-input__field {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.94rem;
+  color: var(--color-ink);
+  background: var(--color-surface-muted);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.todo-input__field::placeholder {
+  color: var(--color-ink-faint);
+}
+
+.todo-input__field:hover {
+  border-color: var(--color-border-strong);
+}
+
+.todo-input__field:focus {
+  outline: none;
+  background: var(--color-surface);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.todo-input__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-dark)
+  );
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+.todo-input__button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop);
+  filter: brightness(1.04);
+}
+
+.todo-input__button:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.todo-input__button:disabled {
+  transform: none;
+  box-shadow: none;
+}
+
+.todo-input__icon {
+  font-size: 1.05rem;
+}
+
+/* ================================================================ */
+/* Filter                                                             */
+/* ================================================================ */
+.filter {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    background var(--transition-base);
+}
+
+.filter__button:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+.filter__button--active {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-dark)
+  );
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 14px -6px rgba(224, 96, 63, 0.5);
+}
+
+.filter__button--active:hover {
+  color: #fff;
+  border-color: transparent;
+}
+
+.filter__icon {
+  font-size: 0.9rem;
+}
+
+/* ================================================================ */
+/* Scrollable list viewport                                          */
+/* ================================================================ */
+.app__list-viewport {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 2px;
+  padding: 2px 4px 16px 0;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+.app__list-viewport::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app__list-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app__list-viewport::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-pill);
+}
+
+.app__list-viewport::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
+
+/* ================================================================ */
+/* TodoList + TodoItem                                               */
+/* ================================================================ */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-list__empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--color-ink-faint);
+  font-size: 0.88rem;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--color-border);
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    background var(--transition-base);
+}
+
+.todo-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+  border-color: transparent;
+  background: var(--color-surface-muted-hover);
+}
+
+.todo-item--completed {
+  animation: complete-settle 480ms var(--ease-emphasized);
+}
+
+@keyframes complete-settle {
+  0% {
+    background: var(--color-success-soft);
+    border-color: var(--color-success);
+  }
+  100% {
+    background: var(--color-surface-muted);
+    border-color: var(--color-border);
+  }
+}
+
+.todo-item__check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  border-radius: 50%;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.todo-item__check:hover {
+  border-color: var(--color-success);
+  transform: scale(1.1);
+}
+
+.todo-item--completed .todo-item__check {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.todo-item__check-icon {
+  font-size: 0.68rem;
+  color: #fff;
+  animation: check-pop 320ms var(--ease-emphasized) both;
+}
+
+@keyframes check-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.todo-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.todo-item__title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-ink);
+  word-break: break-word;
+  transition: color var(--transition-base);
+}
+
+.todo-item--completed .todo-item__title {
+  color: var(--color-ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-ink-faint);
+}
+
+.todo-item__timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-ink-faint);
+}
+
+.todo-item__actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.55;
+  transition: opacity var(--transition-base);
+}
+
+.todo-item:hover .todo-item__actions {
+  opacity: 1;
+}
+
+.todo-item__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--color-ink-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.todo-item__action-btn:hover {
+  background: var(--color-surface);
+  color: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.todo-item__action-btn--danger:hover {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+/* ================================================================ */
+/* Responsive breakpoints                                            */
+/* ================================================================ */
+
+@media (max-width: 380px) {
+  .app__stat {
+    min-width: 60px;
+    padding: 7px 10px;
+  }
+
+  .todo-item__actions {
+    opacity: 1;
+  }
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .app__card {
+    max-width: 620px;
+    height: min(720px, 100%);
+  }
+
+  .app__header {
+    padding: 28px 30px 20px;
+  }
+
+  .app__main {
+    padding: 20px 30px 0;
+    gap: 16px;
+  }
+
+  .app__list-viewport {
+    padding: 2px 6px 20px 0;
+  }
+
+  .app__footer {
+    padding: 14px 30px 20px;
+  }
+
+  .app__title {
+    font-size: 1.85rem;
+  }
+
+  .todo-input {
+    flex-direction: row;
+  }
+
+  .todo-input__field {
+    flex: 1;
+  }
+
+  .todo-input__button {
+    flex-shrink: 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .app__card {
+    max-width: 660px;
+    height: min(760px, 100%);
+  }
+
+  .app__header {
+    padding: 32px 36px 22px;
+  }
+
+  .app__main {
+    padding: 22px 36px 0;
+  }
+
+  .app__footer {
+    padding: 16px 36px 22px;
+  }
+
+  .app__title {
+    font-size: 2rem;
+  }
+
+  .todo-item {
+    padding: 13px 16px;
+  }
+}
+
+/* Touch devices: no hover-only affordances hidden behind opacity */
+@media (hover: none) {
+  .todo-item__actions {
+    opacity: 1;
+  }
+
+  .todo-item:hover,
+  .todo-input__button:hover,
+  .filter__button:hover {
+    transform: none;
+  }
+}
