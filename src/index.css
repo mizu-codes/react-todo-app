@@ -2,9 +2,9 @@
 
 :root {
   /* Background gradient — deep sea navy into teal                  */
-  --gradient-start: #0b1a1f;
-  --gradient-mid: #15303a;
-  --gradient-end: #26505e;
+  --gradient-start: #071016;
+  --gradient-mid: #0e232b;
+  --gradient-end: #1c3d47;
 
   /* Accent — warm coral, used sparingly for actions & focus states */
   --color-accent: #ff7a59;

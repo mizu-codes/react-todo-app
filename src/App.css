@@ -7,18 +7,13 @@
   padding: clamp(12px, 4vw, 32px);
   background:
     radial-gradient(
-      ellipse 80% 60% at 20% 15%,
-      rgba(255, 122, 89, 0.16),
+      ellipse 70% 55% at 18% 12%,
+      rgba(255, 122, 89, 0.1),
       transparent 60%
     ),
     radial-gradient(
-      ellipse 70% 60% at 85% 20%,
-      rgba(47, 191, 135, 0.14),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 70% 70% at 50% 100%,
-      rgba(38, 80, 94, 0.5),
+      ellipse 65% 60% at 85% 90%,
+      rgba(47, 191, 135, 0.12),
       transparent 65%
     ),
     linear-gradient(
@@ -78,8 +73,8 @@
   top: -140px;
   left: -110px;
   background: var(--color-accent);
-  opacity: 0.23;
-  animation: drift-a 13s ease-in-out infinite;
+  opacity: 0.16;
+  animation: drift-a 16s ease-in-out infinite;
 }
 
 .app__mesh-blob--2 {
@@ -88,18 +83,8 @@
   bottom: -150px;
   right: -110px;
   background: var(--color-success);
-  opacity: 0.22;
-  animation: drift-b 15s ease-in-out infinite;
-}
-
-.app__mesh-blob--3 {
-  width: 380px;
-  height: 380px;
-  top: 40%;
-  left: 50%;
-  background: var(--gradient-end);
-  opacity: 0.29;
-  animation: drift-c 11s ease-in-out infinite;
+  opacity: 0.18;
+  animation: drift-b 18s ease-in-out infinite;
 }
 
 .app__mesh-blob--1 {
@@ -107,9 +92,6 @@
 }
 .app__mesh-blob--2 {
   animation: drift-b 18s ease-in-out infinite;
-}
-.app__mesh-blob--3 {
-  animation: drift-c 17s ease-in-out infinite;
 }
 
 @keyframes drift-a {
@@ -129,16 +111,6 @@
   }
   50% {
     transform: translate(-28px, -22px) scale(1.06);
-  }
-}
-
-@keyframes drift-c {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-46%, -54%) scale(1.1);
   }
 }
 

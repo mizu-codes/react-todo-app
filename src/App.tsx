@@ -30,7 +30,6 @@ function App() {
       <div className="app__mesh" aria-hidden="true">
         <span className="app__mesh-blob app__mesh-blob--1" />
         <span className="app__mesh-blob app__mesh-blob--2" />
-        <span className="app__mesh-blob app__mesh-blob--3" />
       </div>
       <div className="app__card">
         <header className="app__header">
