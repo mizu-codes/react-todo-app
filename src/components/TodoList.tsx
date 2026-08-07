@@ -28,7 +28,7 @@ function TodoList({
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
-        <p>No tasks yet. Add your first task above to get started.</p>
+        <p>📝 No tasks yet. Add your first task above to get started.</p>
       </div>
     );
   }

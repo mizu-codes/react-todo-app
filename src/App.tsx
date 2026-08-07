@@ -28,10 +28,10 @@ function App() {
   return (
     <div className="app">
       <div className="app__mesh" aria-hidden="true">
-      <span className="app__mesh-blob app__mesh-blob--1" />
-      <span className="app__mesh-blob app__mesh-blob--2" />
-      <span className="app__mesh-blob app__mesh-blob--3" />
-    </div>
+        <span className="app__mesh-blob app__mesh-blob--1" />
+        <span className="app__mesh-blob app__mesh-blob--2" />
+        <span className="app__mesh-blob app__mesh-blob--3" />
+      </div>
       <div className="app__card">
         <header className="app__header">
           <div className="app__heading-row">
@@ -71,7 +71,7 @@ function App() {
 
         <footer className="app__footer">
           <p>
-            {totalTasks} tasks total · {completedTasks} completed
+            {totalTasks} Tasks • {completedTasks} Completed
           </p>
         </footer>
       </div>

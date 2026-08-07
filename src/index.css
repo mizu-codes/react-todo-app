@@ -11,6 +11,7 @@
   --color-accent-dark: #e0603f;
   --color-accent-soft: #ffe4da;
   --color-accent-rgb: 255, 122, 89;
+  --color-ink-rgb: 28, 33, 44;
 
   /* Secondary accent — used for "completed" state                 */
   --color-success: #2fbf87;
@@ -38,9 +39,11 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   /* Elevation — softer, more diffuse than a single hard shadow */
-  --shadow-card:
-    0 1px 1px rgba(15, 32, 39, 0.04), 0 8px 24px -8px rgba(15, 32, 39, 0.28),
-    0 30px 60px -24px rgba(15, 32, 39, 0.45);
+--shadow-card:
+  0 1px 0 rgba(255, 255, 255, 0.4) inset,
+  0 1px 1px rgba(15, 32, 39, 0.04),
+  0 8px 24px -8px rgba(15, 32, 39, 0.28),
+  0 30px 60px -24px rgba(15, 32, 39, 0.45);
   --shadow-soft: 0 6px 16px -8px rgba(28, 33, 44, 0.16);
   --shadow-pop: 0 10px 22px -10px rgba(224, 96, 63, 0.45);
 

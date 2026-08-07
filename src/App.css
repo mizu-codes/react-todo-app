@@ -291,6 +291,7 @@
 }
 
 .todo-input__button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -299,28 +300,42 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-accent-dark)
-  );
-  border: none;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    var(--shadow-soft);
+  overflow: hidden;
   transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast),
-    filter var(--transition-fast);
+    transform 180ms var(--ease-emphasized),
+    box-shadow 180ms var(--ease-emphasized),
+    filter 180ms ease;
+}
+
+.todo-input__button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  pointer-events: none;
 }
 
 .todo-input__button:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-pop);
-  filter: brightness(1.04);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    var(--shadow-pop);
+  filter: brightness(1.05);
 }
 
 .todo-input__button:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
   filter: brightness(0.98);
 }
 
@@ -351,34 +366,41 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-ink-muted);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-pill);
   transition:
-    border-color var(--transition-base),
-    color var(--transition-base),
-    background var(--transition-base);
+    border-color 180ms var(--ease-emphasized),
+    color 180ms var(--ease-emphasized),
+    background 180ms var(--ease-emphasized),
+    transform 150ms var(--ease-emphasized);
 }
 
 .filter__button:hover {
   border-color: var(--color-border-strong);
   color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.filter__button:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .filter__button--active {
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-accent-dark)
-  );
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 6px 14px -6px rgba(224, 96, 63, 0.5);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 6px 14px -6px rgba(224, 96, 63, 0.5);
 }
 
 .filter__button--active:hover {
   color: #fff;
   border-color: transparent;
+  transform: translateY(-1px);
 }
 
 .filter__icon {
@@ -574,15 +596,19 @@
   border: none;
   border-radius: var(--radius-sm);
   transition:
-    background var(--transition-fast),
-    color var(--transition-fast),
-    transform var(--transition-fast);
+    background 150ms var(--ease-emphasized),
+    color 150ms var(--ease-emphasized),
+    transform 150ms var(--ease-emphasized);
 }
 
 .todo-item__action-btn:hover {
-  background: var(--color-surface);
+  background: rgba(var(--color-ink-rgb), 0.06);
   color: var(--color-accent-dark);
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.05);
+}
+
+.todo-item__action-btn:active {
+  transform: translateY(0) scale(0.94);
 }
 
 .todo-item__action-btn--danger:hover {
@@ -665,40 +691,42 @@
 
 .todo-edit__btn--save {
   color: #fff;
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-accent-dark)
-  );
-  border: none;
-  box-shadow: var(--shadow-soft);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    var(--shadow-soft);
 }
 
 .todo-edit__btn--save:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-pop);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    var(--shadow-pop);
   filter: brightness(1.04);
 }
 
 .todo-edit__btn--save:active:not(:disabled) {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
   filter: brightness(0.98);
 }
 
 .todo-edit__btn--cancel {
   color: var(--color-ink-muted);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--color-border);
 }
 
 .todo-edit__btn--cancel:hover {
   color: var(--color-ink);
   border-color: var(--color-border-strong);
-  background: var(--color-surface-muted);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .todo-edit__btn--cancel:active {
-  transform: translateY(0);
+  transform: scale(0.96);
 }
 
 /* Tablet+: input and buttons share a row, all same height */
