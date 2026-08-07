@@ -7,6 +7,7 @@ interface TodoListProps {
   handleDeleteTodo: (id: string) => void;
   handleEditTodo: (id: string) => void;
   handleUpdateTodo: () => void;
+  handleCancelEdit: () => void;
 
   editingId: string | null;
   editInput: string;
@@ -19,6 +20,7 @@ function TodoList({
   handleDeleteTodo,
   handleEditTodo,
   handleUpdateTodo,
+  handleCancelEdit,
   editingId,
   editInput,
   setEditInput,
@@ -41,6 +43,7 @@ function TodoList({
           handleDeleteTodo={handleDeleteTodo}
           handleEditTodo={handleEditTodo}
           handleUpdateTodo={handleUpdateTodo}
+          handleCancelEdit={handleCancelEdit}
           editingId={editingId}
           editInput={editInput}
           setEditInput={setEditInput}

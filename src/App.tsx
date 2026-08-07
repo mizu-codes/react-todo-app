@@ -22,18 +22,22 @@ function App() {
     handleToggleComplete,
     handleEditTodo,
     handleUpdateTodo,
+    handleCancelEdit,
   } = useTodos();
 
   return (
     <div className="app">
+      <div className="app__mesh" aria-hidden="true">
+      <span className="app__mesh-blob app__mesh-blob--1" />
+      <span className="app__mesh-blob app__mesh-blob--2" />
+      <span className="app__mesh-blob app__mesh-blob--3" />
+    </div>
       <div className="app__card">
         <header className="app__header">
           <div className="app__heading-row">
             <div>
               <h1 className="app__title">TaskHub</h1>
-              <p className="app__subtitle">
-                Stay organized. Stay productive.
-              </p>
+              <p className="app__subtitle">Stay organized. Stay productive.</p>
             </div>
             <div className="app__stat" aria-label="Active tasks remaining">
               <span className="app__stat-count">{activeCount}</span>
@@ -57,6 +61,7 @@ function App() {
               handleDeleteTodo={handleDeleteTodo}
               handleEditTodo={handleEditTodo}
               handleUpdateTodo={handleUpdateTodo}
+              handleCancelEdit={handleCancelEdit}
               editingId={editingId}
               editInput={editInput}
               setEditInput={setEditInput}

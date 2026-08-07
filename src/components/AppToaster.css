@@ -1,0 +1,111 @@
+/* ================================================================ */
+/* Sonner container — respects safe areas, sits above the app card   */
+/* ================================================================ */
+[data-sonner-toaster] {
+  --width: 336px;
+  font-family: var(--font-body);
+}
+
+[data-sonner-toaster][data-x-position="right"] {
+  right: max(16px, env(safe-area-inset-right));
+  top: max(16px, env(safe-area-inset-top));
+}
+
+[data-sonner-toaster][data-x-position="center"] {
+  top: max(12px, env(safe-area-inset-top));
+}
+
+/* ================================================================ */
+/* Toast card                                                        */
+/* ================================================================ */
+[data-sonner-toast].app-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  width: var(--width);
+  max-width: calc(100vw - 32px);
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-md);
+  box-shadow:
+    var(--shadow-soft),
+    0 12px 28px -12px rgba(15, 32, 39, 0.35);
+  border-left: 3px solid var(--color-border-strong);
+}
+
+[data-sonner-toast].app-toast .app-toast__title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+[data-sonner-toast].app-toast .app-toast__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.app-toast__icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ================================================================ */
+/* Variant accents                                                   */
+/* ================================================================ */
+[data-sonner-toast].app-toast--success {
+  border-left-color: var(--color-success);
+}
+[data-sonner-toast].app-toast--success .app-toast__icon-svg {
+  color: var(--color-success);
+}
+
+[data-sonner-toast].app-toast--error {
+  border-left-color: var(--color-danger);
+}
+[data-sonner-toast].app-toast--error .app-toast__icon-svg {
+  color: var(--color-danger);
+}
+
+[data-sonner-toast].app-toast--warning {
+  border-left-color: var(--color-accent);
+}
+[data-sonner-toast].app-toast--warning .app-toast__icon-svg {
+  color: var(--color-accent-dark);
+}
+
+[data-sonner-toast].app-toast--info {
+  border-left-color: #4d9de0;
+}
+[data-sonner-toast].app-toast--info .app-toast__icon-svg {
+  color: #3d7fbf;
+}
+
+/* ================================================================ */
+/* Responsive: full-bleed, centered stacking on mobile                */
+/* ================================================================ */
+@media (max-width: 640px) {
+  [data-sonner-toaster] {
+    --width: min(92vw, 380px);
+  }
+
+  [data-sonner-toast].app-toast {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sonner-toast] {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

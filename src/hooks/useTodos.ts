@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import type { Todo, FilterType } from "../types/todo";
 
 function useTodos() {
@@ -18,30 +19,37 @@ function useTodos() {
   function handleAddTodo() {
     const trimmed = input.trim();
 
-    if (!trimmed) return;
+    if (!trimmed) {
+      toast.warning("Please enter a task before adding.");
+      return;
+    }
 
-    setTodos((prevTodos) => {
-      const duplicate = prevTodos.some(
-        (todo) => todo.title.toLowerCase() === trimmed.toLowerCase(),
-      );
+    const duplicate = todos.some(
+      (todo) => todo.title.toLowerCase() === trimmed.toLowerCase(),
+    );
 
-      if (duplicate) return prevTodos;
+    if (duplicate) {
+      toast.error("That task already exists.");
+      return;
+    }
 
-      return [
-        ...prevTodos,
-        {
-          id: crypto.randomUUID(),
-          title: trimmed,
-          completed: false,
-          createdAt: new Date().toLocaleString(),
-        },
-      ];
-    });
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      {
+        id: crypto.randomUUID(),
+        title: trimmed,
+        completed: false,
+        createdAt: new Date().toLocaleString(),
+      },
+    ]);
 
+    toast.success("Task added successfully.");
     setInput("");
   }
 
   function handleToggleComplete(id: string) {
+    const target = todos.find((todo) => todo.id === id);
+
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
@@ -54,10 +62,15 @@ function useTodos() {
         return todo;
       }),
     );
+
+    if (target && !target.completed) {
+      toast.success("Task marked as completed.");
+    }
   }
 
   function handleDeleteTodo(id: string) {
     setTodos(todos.filter((todo) => todo.id !== id));
+    toast.success("Task deleted successfully.");
   }
 
   const activeCount = todos.filter((todo) => !todo.completed).length;
@@ -87,7 +100,10 @@ function useTodos() {
   }
 
   function handleUpdateTodo() {
-    if (editInput.trim() === "") return;
+    if (editInput.trim() === "") {
+      toast.warning("Task title can't be empty.");
+      return;
+    }
 
     const duplicate = todos.some(
       (todo) =>
@@ -95,7 +111,10 @@ function useTodos() {
         todo.title.toLowerCase() === editInput.trim().toLowerCase(),
     );
 
-    if (duplicate) return;
+    if (duplicate) {
+      toast.error("That task already exists.");
+      return;
+    }
 
     setTodos(
       todos.map((todo) => {
@@ -110,6 +129,12 @@ function useTodos() {
       }),
     );
 
+    toast.success("Task updated successfully.");
+    setEditingId(null);
+    setEditInput("");
+  }
+
+  function handleCancelEdit() {
     setEditingId(null);
     setEditInput("");
   }
@@ -128,6 +153,7 @@ function useTodos() {
     handleToggleComplete,
     handleEditTodo,
     handleUpdateTodo,
+    handleCancelEdit,
 
     filteredTodos,
     activeCount,

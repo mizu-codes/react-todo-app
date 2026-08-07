@@ -1,0 +1,175 @@
+/* ================================================================ */
+/* Backdrop                                                           */
+/* ================================================================ */
+.confirm-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(11, 20, 26, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: confirm-backdrop-in 180ms ease-out;
+}
+
+@keyframes confirm-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ================================================================ */
+/* Modal card                                                         */
+/* ================================================================ */
+.confirm-modal {
+  width: 100%;
+  max-width: 380px;
+  padding: 26px 24px 22px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  animation: confirm-modal-in 220ms var(--ease-emphasized);
+}
+
+@keyframes confirm-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.confirm-modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 1.3rem;
+}
+
+.confirm-modal__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  word-break: break-word;
+}
+
+.confirm-modal__subtitle {
+  margin-top: 6px;
+  font-size: 0.86rem;
+  color: var(--color-ink-muted);
+}
+
+.confirm-modal__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ================================================================ */
+/* Buttons — press feedback works for mouse AND touch (:active),      */
+/* focus-visible covers keyboard, neither depends on hover            */
+/* ================================================================ */
+.confirm-modal__btn {
+  flex: 1;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast),
+    background var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.confirm-modal__btn:active {
+  transform: scale(0.96);
+}
+
+.confirm-modal__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.confirm-modal__btn--cancel {
+  color: var(--color-ink);
+  background: transparent;
+  border: 1.5px solid var(--color-border-strong);
+}
+
+.confirm-modal__btn--cancel:hover {
+  background: var(--color-surface-muted);
+}
+
+.confirm-modal__btn--delete {
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-danger), #c73438);
+  border: none;
+  box-shadow: 0 8px 18px -8px rgba(229, 72, 77, 0.5);
+}
+
+.confirm-modal__btn--delete:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.confirm-modal__btn--delete:active {
+  transform: scale(0.96);
+  filter: brightness(0.97);
+}
+
+/* ================================================================ */
+/* Responsive                                                         */
+/* ================================================================ */
+@media (max-width: 380px) {
+  .confirm-modal {
+    padding: 22px 18px 18px;
+  }
+
+  .confirm-modal__actions {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 640px) {
+  .confirm-modal {
+    max-width: 400px;
+    padding: 30px 28px 24px;
+  }
+}
+
+/* ================================================================ */
+/* Reduced motion — disable all movement, keep instant show/hide      */
+/* ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .confirm-modal__backdrop,
+  .confirm-modal {
+    animation: none !important;
+  }
+
+  .confirm-modal__btn,
+  .confirm-modal__btn:active,
+  .confirm-modal__btn--delete:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
